@@ -20,9 +20,29 @@ const Person = mongoose.model('Person', personSchema);
 
 //let Person;
 
+//const createAndSavePerson = (done) => {
+  //done(null /*, data*/);
+//};
+
+// Create and save a person record
 const createAndSavePerson = (done) => {
-  done(null /*, data*/);
+  // Create a new Person instance wiht sample data
+    const person = new Person({
+      name: "John",
+      age: 25,
+      favoriteFoods: ["pizza", "sushi"]
+    });
+ // Save the person document ot the database
+    person.save((err, data) =>{
+      // If there's an error, pass it to the done callback
+      if (err) {
+        return done(err);
+      }
+      // If sucessfull, pass null for error and the saved data
+      done(null, data);
+    });
 };
+
 
 const createManyPeople = (arrayOfPeople, done) => {
   done(null /*, data*/);
