@@ -99,13 +99,30 @@ const findPersonById = (personId, done) => {
       return done(err);
     }
     done(null, docs);
-  })
+  });
 };
 
-const findEditThenSave = (personId, done) => {
-  const foodToAdd = "hamburger";
+//const findEditThenSave = (personId, done) => {
+//  const foodToAdd = "hamburger";
 
-  done(null /*, data*/);
+//  done(null /*, data*/);
+//};
+
+const findEditThenSave = (personId, done) => {
+  const foodToAdd = "hamburguer";
+  Person.findById(personId, (err, docs) => {
+    if (err) {
+      return done(err);
+    }
+    Person.favoriteFoods.push(foodToAdd)
+    .save((err, data) =>{
+      if (err) {
+        return done(err);
+      }
+      done(null, docs)
+    });
+    done(null, docs);
+  });
 };
 
 const findAndUpdate = (personName, done) => {
