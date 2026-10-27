@@ -116,12 +116,16 @@ const findEditThenSave = (personId, done) => {
     }
 
     docs.favoriteFoods.push(foodToAdd);
-
+//!!!SHADOWING - Tecnicamente funciona, mas você está redeclarando
+//a variável docs no escopo do segundo callback. 
+// Isso causa shadowing (sombreamento de variável)
+//  — a nova variável docs do segundo callback "esconde" a 
+// do primeiro.   
     docs.save((err, data) => {
       if (err) {
         return done(err);
       }
-      done(null, docs);
+      done(null, data);//<<= SHADOWING (TROCAR DOCS POR DATA!!)
     });
   });    
 };
